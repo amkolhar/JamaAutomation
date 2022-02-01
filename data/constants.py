@@ -1,0 +1,15 @@
+# Constants
+
+CONFIG_FILE = "config.py"
+COMPANY_JAMA_URL = "company_jama_url"
+CONFIG_CREDENTIAL = "credentials"
+USERNAME = "username"
+PASSWORD = "password"
+JAMA_DETAILS = "jama_details"
+PROJECT = "project_id"
+ASSIGNED_TO = "assigned_to"
+TESTCASE_ITEM_ID = "testcase_item_id"
+TESTSUITE_NAME = "testsuite_name"
+FIELDS = "fields"
+NAME = "name"
+TESTCASE_ID = "testcase_id"
