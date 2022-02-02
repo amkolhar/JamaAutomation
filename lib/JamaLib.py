@@ -9,8 +9,8 @@ import warnings
 
 from py_jama_rest_client.client import JamaClient
 
-import data.constants as const
-from data import config
+import JamaAutomation.data.constants as const
+from JamaAutomation.data import config
 
 warnings.filterwarnings("ignore")
 
@@ -39,39 +39,68 @@ class JamaLib:
         self.project = config.CONFIG[const.PROJECT]
         self.assigned_to = config.CONFIG[const.ASSIGNED_TO]
         self.testcase_ids = {}
+        self.testsuite_location = config.TESTSUITE_LOCATION
+
+    def create_folder(self, folder_details):
+        """
+        folder_details = {"parent_location": "int",
+                          "child_item_id" : "int",
+                          "fields": {"name":"folder name", any other key:value needed for folder}}
+        :param folder_details:
+        :return:
+        """
+        folder_api_id = self.basic_auth_client.post_item(project=self.project,
+                                                         item_type_id=config.ITEM_IDS[const.FOLDER_ITEM_ID],
+                                                         child_item_type_id=folder_details["child_item_id"],
+                                                         location={"item": folder_details[const.PARENT_LOCATION]},
+                                                         fields=folder_details[const.FIELDS])
+        logger.info("Folder %s is created" % folder_details[const.FIELDS][const.NAME])
+
+        return folder_api_id
 
     def create_test_case(self, testcase_details):
+        """
+        testcase_details = {"parent_location": "int",
+                            "fields": dictionary of key:values for test_case}
+        :param testcase_details:
+        :return:
+        """
         try:
-            jama_response = self.basic_auth_client.post_item(project=self.project,
-                                                             item_type_id=config.ITEM_IDS[const.TESTCASE_ITEM_ID],
-                                                             child_item_type_id=0,
-                                                             location={
-                                                                 "item": config.TESTSUITE_LOCATION[
-                                                                     testcase_details[const.TESTSUITE_NAME]]},
-                                                             fields=testcase_details[const.FIELDS])
-            self.testcase_ids[testcase_details[const.TESTSUITE_NAME]][const.FIELDS[const.NAME]] = jama_response
-            logger.info("Success : %s is created" % const.FIELDS[const.NAME])
+            testcase_id = self.basic_auth_client.post_item(project=self.project,
+                                                           item_type_id=config.ITEM_IDS[const.TESTCASE_ITEM_ID],
+                                                           child_item_type_id=0,
+                                                           location={
+                                                               "item": testcase_details[const.PARENT_LOCATION]},
+                                                           fields=testcase_details[const.FIELDS])
+            logger.info("Success : %s is created" % testcase_details[const.FIELDS][const.NAME])
 
         except Exception as e:
             logger.error(e)
-            logger.error("Error in creating the testcase : %s" % const.FIELDS[const.NAME])
+            logger.error(f"Error in creating the testcase : %s" % testcase_details[const.FIELDS][const.NAME])
+            return None
+
+        return testcase_id
 
     def update_test_case(self, testcase_details):
+        """
+        testcase_details = {"parent_location": "int",
+                            "fields": dictionary of key:values for test_case}
+        :param testcase_details:
+        :return:
+        """
         try:
             jama_response = self.basic_auth_client.put_item(project=self.project,
                                                             item_id=testcase_details[const.TESTCASE_ID],
                                                             item_type_id=config.ITEM_IDS[const.TESTCASE_ITEM_ID],
                                                             child_item_type_id=0,
                                                             location={
-                                                                "item": config.TESTSUITE_LOCATION[
-                                                                    testcase_details[const.TESTSUITE_NAME]]},
+                                                                "item": testcase_details[const.PARENT_LOCATION]},
                                                             fields=testcase_details[const.FIELDS])
-            self.testcase_ids[testcase_details[const.TESTSUITE_NAME]][const.FIELDS[const.NAME]] = jama_response
-            logger.info("Success : %s is created" % const.FIELDS[const.NAME])
+            logger.info("Success : %s is updated" % testcase_details[const.FIELDS][const.NAME])
 
         except Exception as e:
             logger.error(e)
-            logger.error("Error in updating the testcase : %s" % const.FIELDS[const.NAME])
+            logger.error("Error in updating the testcase : %s" % testcase_details[const.FIELDS][const.NAME])
 
 
 if __name__ == '__main__':
