@@ -1,0 +1,9 @@
+company_jama_url: "company url"
+User:
+    username: ""
+    password: ""
+    assigned_to: "user_name"
+Project:
+    id: project_id
+    testsuite_loc_id : 0
+    requirement_loc_id : 0

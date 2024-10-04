@@ -1,0 +1,20 @@
+# README #
+
+Steps for update detail design and unit test in JAMA
+
+1. Create text files under lpc-sw/jama_tool/inputs 
+2. add detail-design file paths below the tag @detail-design-file-paths-start in .txt file 
+    after adding all the paths add the tag the tag @detail-design-file-paths-end in next line.
+3. add unit-test file paths below the tag @unit-test-file-paths-start in .txt file 
+    after adding all the paths add the tag the tag @unit-test-file-paths-end in next line.
+4. To update details design in JAMA run python file lpc-sw/jama_tool/jama_automation/lib/detail_design_update.py
+    it takes two command line arguments 
+    a. --input_file : Provide which .txt file to be executed
+        by default script will execute all .txt files present in lpc-sw/jama_tool/inputs 
+    b. --git_branch : provide git branch name to update link in JAMA for detail design.
+5. To update unit test in JAMA run python file jama_tool/jama_automation/lib/unit_test_update.py
+    it takes two command line arguments 
+    a. --input_file : Provide which .txt file to be executed
+        by default script will execute all .txt files present in lpc-sw/jama_tool/inputs 
+    b. --git_branch : provide git branch name to update link in JAMA for unit test.
+

@@ -1,0 +1,10 @@
+Requirement ID,Feature,Name,Description,Rationale,Priority,Verification Method,Verification Criteria
+,SOA-Laser,SOA enable disable,"There should be a reconfig in ICSM node for each SOA (0-3) which will allow the user to enable and disable individual SOA ",This reconfig is needed for Noise Calibration and SOA foveation calibration,MEDIUM,TEST,"On disabling an SOA SOA_FOV_current = 0 amp
+On enabling an SOA, SOA_FOV_current is the set current for the SOA"
+,,Laser enable disable,There should be a reconfig in ICSM node for each Laser(A and B) which will allow the user to enable and disable individual Laser,This reconfig is needed for single laser operations,HIGH,TEST,"On disabling an Laser laser_current = 0 amp
+On enabling an Laser, laser_current is the set current for the laser"
+,,SOA Current Change,There should be a reconfig is ICSM node for each SOA (0-3) which will allow the user to set current for indivisual SOA,This reconfig is needed for Noise Calibration and SOA foveation calibration,MEDIUM,TEST,Set current for the soa should be verified in the telemetry
+,,Laser Current Change,There should be a reconfig is ICSM node for each Laser (A and B) which will allow the user to set current for indivisual Laser,This reconfig is needed for single laser operations,LOW,TEST,Set current for the laser should be verified in the telemetry
+,Production Mode,Exposed Reconfig,"Describes the exposed reconfig node, parameters and options in PROD mode","Only limited nodes, parameters and options are exposed in PROD mode",HIGH,TEST,Verify only the limited options are exposed in the PROD mode
+,,Exposed Telemetry,"Describes the exposed  telemetry node, parameters and options in PROD mode","Only limited nodes, parameters and options are exposed in PROD mode",MEDIUM,TEST,Verify only the limited options are exposed in the PROD mode
+,,Range mode switch,Range mode parameter can be changed in PROD mode,Range mode change should be possible in PROD mode without any errors or issues,HIGH,TEST,Verify the range mode change takes place without any errors and there is point cloud available in all the modes

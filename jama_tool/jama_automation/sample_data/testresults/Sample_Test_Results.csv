@@ -1,0 +1,8 @@
+Test Case Name,Test Result,Test Suite,% Rate,Test Type,Component
+test_verify_reconfig_options_prod,FAIL,test_reconfig_prod,1/1 100.0%,Functional,Platform
+test_range_mode_switch_prod,PASS,test_reconfig_prod,1/1 100.0%,Functional,Platform
+test_verify_telemetry_options_prod,PASS,test_reconfig_prod,1/1 100.0%,Functional,Platform
+test_laser_current_change,PASS,test_soa_laser,1/1 100.0%,Functional,ICSM-MCU
+test_laser_enable_disable,FAIL,test_soa_laser,1/1 100.0%,Functional,ICSM-MCU
+test_soa_current_change,PASS,test_soa_laser,1/1 100.0%,Functional,ICSM-MCU
+test_soa_enable_disable,PASS,test_soa_laser,1/1 100.0%,Functional,ICSM-MCU
